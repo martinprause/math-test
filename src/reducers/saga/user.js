@@ -37,6 +37,9 @@ export function * ChangeUserDetailsRequest(payload) {
 		"@class": ".ChangeUserDetailsRequest",
 		"playerId": user.userId,
 		"displayName": payload.name,
+		"scriptData": {
+			"totalScore": 0,
+		}
 	};
 
 	return yield fetch(url, {
