@@ -57,8 +57,11 @@ export function * ChangeUserDetailsRequest(payload) {
 		});
 }
 
-export function * AccountDetailsRequest() {
-	const user = yield select(getUser);
+export function * AccountDetailsRequest(user) {
+	if (!user) {
+         user = yield select(getUser);
+    }
+
 	const url = config.apiUrl.replace('{apiKey}', config.apiKey)
 		+ '/rs/device/' + config.apiSecretKey + '/AccountDetailsRequest';
 

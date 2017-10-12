@@ -14,9 +14,10 @@ export default function * rootSaga() {
 
 function * authSaga() {
 	yield put({type:userActions.LOGGED_GAMESPARKS_REQUEST});
-	const user = yield call(userSaga.DeviceAuthenticationReques);
+	const result = yield call(userSaga.DeviceAuthenticationReques);
 
-	if (user.authToken !== undefined) {
+	if (result.authToken !== undefined) {
+        const user = yield call(userSaga.AccountDetailsRequest, result);
 		yield put({ type: userActions.LOGGED_GAMESPARKS_SUCCESSED, payload: user });
 	} else {
 		yield put({ type: userActions.LOGGED_GAMESPARKS_FAILED, payload: user });
