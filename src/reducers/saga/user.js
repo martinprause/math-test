@@ -84,3 +84,52 @@ export function * AccountDetailsRequest(user) {
 			return null;
 		});
 }
+
+export function * GetUploadUrlRequest(user) {
+    const url = config.apiUrl.replace('{apiKey}', config.apiKey)
+        + '/rs/device/' + config.apiSecretKey + '/GetUploadUrlRequest';
+
+    const body = {
+        "@class": ".GetUploadUrlRequest",
+        "playerId": user.userId,
+    };
+
+    return yield fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(body)
+    }).then(result => JSON.parse(result._bodyInit))
+        .then(result => {
+            return result;
+        }).catch(error => {
+            return error;
+        })
+}
+
+export function * GetUploadedRequest(user) {
+    const url = config.apiUrl.replace('{apiKey}', config.apiKey)
+        + '/rs/device/' + config.apiSecretKey + '/GetUploadedRequest';
+
+    const body = {
+        "@class": ".GetUploadedRequest",
+        "playerId": user.userId,
+		"uploadId": user.scriptData.avatarId
+    };
+
+    return yield fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(body)
+    }).then(result => JSON.parse(result._bodyInit))
+        .then(result => {
+            return result;
+        }).catch(error => {
+            return error;
+        })
+}

@@ -62,6 +62,7 @@ class Welcome extends Component {
 				<Text>Please enter your name</Text>
 				<TextInput
 					style={styles.usernameInput}
+					underlineColorAndroid='transparent'
 					onChangeText={(userName) => this.setState({ userName })}
 					value={userName}
 				/>

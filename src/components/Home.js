@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {Link} from 'react-router-native';
+import {View, Text, Image} from 'react-native';
 import CategoriesSlider from './slider/CategoriesSlider'
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -63,18 +64,18 @@ class Home extends Component {
                 {this.renderHeader()}
                 {this.renderCategoriesSlider()}
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.footerBtn}>
+                    <Link style={styles.footerBtn}>
                         <Image
                             source={require('../assets/images/leaderboards.png')}
                             style={styles.footerBtnImage}
                         />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.footerBtn}>
+                    </Link>
+                    <Link to={'/account-edit'} style={styles.footerBtn}>
                         <Image
                             source={require('../assets/images/home.png')}
                             style={styles.footerBtnImage}
                         />
-                    </TouchableOpacity>
+                    </Link>
                 </View>
             </View>
         )

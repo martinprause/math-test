@@ -8,6 +8,10 @@ export const CHANGE_NAME_REQUEST = `${prefix}_change_name_request`;
 export const CHANGE_NAME_SUCCESSED = `${prefix}_change_name_successed`;
 export const CHANGE_NAME_FAILED = `${prefix}_change_name_failed`;
 
+export const CHANGE_AVATAR_REQUEST = `${prefix}_change_avatar_request`;
+export const CHANGE_AVATAR_SUCCESSED = `${prefix}_change_avatar_successed`;
+export const CHANGE_AVATAR_FAILED = `${prefix}_change_avatar_failed`;
+
 export const changeName = (name) => {
 	return (dispatch) => {
 		dispatch({
@@ -15,4 +19,12 @@ export const changeName = (name) => {
 			payload: { name },
 		});
 	}
+}
+
+export const changeAvatar = () => {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_AVATAR_REQUEST,
+        });
+    }
 }

@@ -29,6 +29,16 @@ const reducer = (state = initState, action) => {
 				user: action.payload
 			}
 		}
+        case user.CHANGE_AVATAR_SUCCESSED: {
+            return {...state,
+                user: action.payload
+            }
+        }
+        case user.CHANGE_AVATAR_FAILED: {
+            return {...state,
+                user: action.payload
+            }
+        }
 		default:
 			return state
 	}
