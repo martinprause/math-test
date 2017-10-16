@@ -1,14 +1,9 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import {View, Text, Dimensions} from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import CategoriesSlider from './slider/CategoriesSlider'
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import { ENTRIES2 } from './entires';
-import SliderEntry from './SliderEntry';
-
-const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 const styles = EStyleSheet.create({
     wrapper: {
@@ -23,34 +18,30 @@ const styles = EStyleSheet.create({
     slider: {
         height: '70%'
     },
-    sliderContentContainer: {},
     footer: {
         height: '10%',
-        backgroundColor: 'red',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    footerBtn: {
+        borderWidth: 2,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 20,
+        height: 50,
+        width: 50
+    },
+    footerBtnImage: {
+        height: 35,
+        width: 35
     }
 
 });
 
-
 class Home extends Component {
     constructor(props) {
         super(props);
-    }
-
-    _renderItem ({item, index}, parallaxProps) {
-        return (
-            <SliderEntry
-                data={item}
-                even={(index + 1) % 2 === 0}
-                parallax={true}
-                parallaxProps={parallaxProps}
-            />
-        );
-    }
-
-    wp = (percentage) => {
-        const value = (percentage * viewportWidth) / 100;
-        return Math.round(value);
     }
 
     renderHeader = () => {
@@ -63,32 +54,27 @@ class Home extends Component {
         );
     }
 
-    render() {
-        const sliderWidth = viewportWidth;
-        const slideWidth = this.wp(75);
-        const itemHorizontalMargin = this.wp(2);
-        const itemWidth = slideWidth + itemHorizontalMargin;
+    renderCategoriesSlider = () =>
+        <CategoriesSlider />
 
+    render() {
         return (
             <View style={styles.wrapper}>
                 {this.renderHeader()}
-                <Carousel
-                    data={ENTRIES2}
-                    renderItem={this._renderItem}
-                    sliderWidth={sliderWidth}
-                    itemWidth={itemWidth}
-                    inactiveSlideScale={1}
-                    inactiveSlideOpacity={1}
-                    hasParallaxImages={true}
-                    enableMomentum={false}
-                    loop={false}
-                    activeSlideAlignment={'start'}
-                    containerCustomStyle={styles.slider}
-                    contentContainerCustomStyle={styles.sliderContentContainer}
-                    removeClippedSubviews={false}
-                />
+                {this.renderCategoriesSlider()}
                 <View style={styles.footer}>
-
+                    <TouchableOpacity style={styles.footerBtn}>
+                        <Image
+                            source={require('../assets/images/leaderboards.png')}
+                            style={styles.footerBtnImage}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.footerBtn}>
+                        <Image
+                            source={require('../assets/images/home.png')}
+                            style={styles.footerBtnImage}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         )
