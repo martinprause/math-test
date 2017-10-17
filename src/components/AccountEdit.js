@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-native';
-import { changeName, changeAvatar } from '../actions/user';
+import {connect} from 'react-redux';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router';
+import {Link} from 'react-router-native';
+import {changeName, changeAvatar} from '../actions/user';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import {View, Text, TouchableOpacity, Image, TextInput, ScrollView} from 'react-native';
 
 const styles = EStyleSheet.create({
     wrapper: {
@@ -60,20 +60,51 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginVertical: 10,
+    },
+    leaderboards: {
+        height: '25%',
+        marginTop: 10,
     }
 });
 
 class AccountEdit extends Component {
     state = {
-      userName : this.props.user.displayName,
+        userName: this.props.user.displayName,
+        leaderboards: [
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2',
+            'Silver League - Addition - Score 100 Level 2'
+        ]
     };
 
     renderAvatar = () => {
         const {user} = this.props;
-        if(user.scriptData.avatarUrl !== undefined) {
+        if (user.scriptData.avatarUrl !== undefined) {
             return (
                 <Image
-                    source={{ uri: user.scriptData.avatarUrl }}
+                    source={{uri: user.scriptData.avatarUrl}}
                     style={styles.avatar}
                 />
             );
@@ -85,6 +116,13 @@ class AccountEdit extends Component {
                 />
             );
         }
+    }
+
+    renderLeaderboards = () => {
+        const { leaderboards } = this.state;
+        return leaderboards.map(item => {
+            return <Text>{item}</Text>
+        });
     }
 
     render() {
@@ -113,7 +151,7 @@ class AccountEdit extends Component {
                         <TextInput
                             underlineColorAndroid='transparent'
                             style={styles.usernameInput}
-                            onChangeText={(userName) => this.setState({ userName })}
+                            onChangeText={(userName) => this.setState({userName})}
                             value={userName}
                         />
                         <TouchableOpacity
@@ -121,16 +159,20 @@ class AccountEdit extends Component {
                             style={[styles.changeNameBtn, uniqueName ? styles.changeNameBtnDisabled : null]}
                             onPress={() => this.props.changeName(userName)}
                         >
-                            <Text style={{ color: 'white' }}>Change</Text>
+                            <Text style={{color: 'white'}}>Change</Text>
                         </TouchableOpacity>
                     </View>
                     <Text>Total score: {user.scriptData.totalScore}</Text>
                     <View style={styles.twoColumnsWrapper}>
                         <Text>Joker: {user.currencies.JOKE}</Text>
                         <TouchableOpacity style={styles.changeNameBtn}>
-                            <Text style={{ color: 'white' }}>Buy</Text>
+                            <Text style={{color: 'white'}}>Buy</Text>
                         </TouchableOpacity>
                     </View>
+                    <Text>Leaderboard :</Text>
+                    <ScrollView style={styles.leaderboards}>
+                        {this.renderLeaderboards()}
+                    </ScrollView>
                 </View>
             </View>
         );
